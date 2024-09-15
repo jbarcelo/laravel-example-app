@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(CategorySeeder::class);
+
+        Category::factory(2)->create();
     
         $AdminUser = new User();
         $AdminUser->name = "admin";
@@ -24,8 +26,6 @@ class DatabaseSeeder extends Seeder
         $AdminUser->role = "role";
         $AdminUser->password = Hash::make('password');
         $AdminUser->save();
-
-        Category::factory(2)->create();
         
 
         User::factory(2)->create();
