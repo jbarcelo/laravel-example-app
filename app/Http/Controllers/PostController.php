@@ -7,6 +7,7 @@ use App\Http\Requests\GuardarPostRequest;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -38,7 +39,8 @@ class PostController extends Controller
         $post->url_clean = $request->url_clean;
         $post->content = $request->content;
         $post->category_id = $request->category_id;
-        $post->user_id = User::all()->random()->id;
+        $post->posted = $request->posted;
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         return back();

@@ -25,6 +25,21 @@
                             <x-input-error :messages="$errors->get('url_clean')" class="mt-2" />
                         </div>
                         <div>
+                            <label for="category_id" >Categories</label>
+                            <select name="category_id" class="mt-1 block w-full"  >
+                              @foreach ($categories as $title => $id)
+                                <option value="{{$id}}">{{$title}}</option>
+                              @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label for="posted" class="form-label">Publicat</label>
+                            <select name="posted" class="mt-1 block w-full" >
+                                <option value="yes">si</option>
+                                <option value="not">no</option>
+                            </select>
+                        </div>
+                        <div>
                             <x-input-label for="content" :value="__('Contingut')" />
                             <textarea name="content" col="3" class="mt-1 block w-full" ></textarea>
                             <x-input-error :messages="$errors->get('content')" class="mt-2" />
