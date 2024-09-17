@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GuardarPostRequest;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -23,7 +24,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        $categories = Category::pluck('id','title');
+        return view('post.create', ['categories' => $categories]);
     }
 
     /**
@@ -35,6 +37,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->url_clean = $request->url_clean;
         $post->content = $request->content;
+        $post->category_id = $request->category_id;
         $post->user_id = User::all()->random()->id;
         $post->save();
 

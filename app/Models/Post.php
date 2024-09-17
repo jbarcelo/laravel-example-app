@@ -14,4 +14,9 @@ class Post extends Model
         'url_clean',
         'content'
     ];
+
+    public function category()
+    {
+      return $this->belongsTo(Category::class);
+    }
 }
