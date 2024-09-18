@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GuardarPostRequest;
 
 class PostController extends Controller
 {
@@ -20,9 +22,12 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GuardarPostRequest $request)
     {
-        //
+        $data = $request->all();
+        $data["user_id"] = User::all()->random()->id;
+        $post = Post::create($data);
+        return response()->json($post);
     }
 
     /**
@@ -44,7 +49,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
         //
     }
